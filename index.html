@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureAudit &mdash; IT Security Audits &amp; Compliance</title>
+  <meta name="description" content="Independent IT security audits, penetration testing, and compliance reviews for growing businesses.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar container">
+      <a href="#" class="logo">Secure<span>Audit</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#contact" class="btn btn-small">Request an Audit</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">IT Security Audits &amp; Compliance</p>
+        <h1>Find the gaps before attackers do.</h1>
+        <p class="hero-sub">
+          We audit your network, applications, and cloud infrastructure against real-world threats
+          and compliance frameworks &mdash; then hand you a prioritized, plain-English plan to fix it.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Request an Audit</a>
+          <a href="#services" class="btn btn-ghost">See what we check</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="container">
+        <h2 class="section-title">Services</h2>
+        <p class="section-sub">A focused set of audits covering the areas most breaches start from.</p>
+
+        <div class="card-grid">
+          <article class="card">
+            <h3>Network Security Audit</h3>
+            <p>Firewall rules, segmentation, exposed ports, and internal traffic review to close off lateral-movement paths.</p>
+          </article>
+          <article class="card">
+            <h3>Penetration Testing</h3>
+            <p>Manual, ethical exploitation of web apps, APIs, and infrastructure to prove exploitability, not just list findings.</p>
+          </article>
+          <article class="card">
+            <h3>Vulnerability Assessment</h3>
+            <p>Automated and manual scanning across your stack, triaged by real business impact instead of raw CVSS score.</p>
+          </article>
+          <article class="card">
+            <h3>Cloud Security Review</h3>
+            <p>AWS/Azure/GCP configuration review &mdash; IAM permissions, storage exposure, logging, and secrets management.</p>
+          </article>
+          <article class="card">
+            <h3>Compliance Readiness</h3>
+            <p>Gap analysis against SOC 2, ISO 27001, HIPAA, or GDPR so audits don't surprise you.</p>
+          </article>
+          <article class="card">
+            <h3>Security Awareness Review</h3>
+            <p>Phishing simulation and policy review to measure your human attack surface, not just the technical one.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="process">
+      <div class="container">
+        <h2 class="section-title">How an audit runs</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-num">01</span>
+            <h3>Scope &amp; Discovery</h3>
+            <p>We map your assets, systems, and compliance targets so the audit tests what actually matters to you.</p>
+          </li>
+          <li>
+            <span class="step-num">02</span>
+            <h3>Assessment</h3>
+            <p>Combination of automated scanning and manual testing by security engineers, not just a tool report.</p>
+          </li>
+          <li>
+            <span class="step-num">03</span>
+            <h3>Reporting</h3>
+            <p>A prioritized findings report: what's exploitable, what's theoretical, and what to fix first.</p>
+          </li>
+          <li>
+            <span class="step-num">04</span>
+            <h3>Remediation Support</h3>
+            <p>We stay engaged through fixes and re-test to confirm issues are actually closed.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="why-us" class="why-us">
+      <div class="container why-us-inner">
+        <div>
+          <h2 class="section-title">Why teams choose us</h2>
+          <ul class="check-list">
+            <li>Findings ranked by real business risk, not just severity score</li>
+            <li>Plain-English reports engineers and executives can both use</li>
+            <li>Fixed-scope pricing agreed before work starts &mdash; no surprise hours</li>
+            <li>Free re-test included once remediation is complete</li>
+          </ul>
+        </div>
+        <div class="stat-block">
+          <div class="stat"><strong>120+</strong><span>Audits completed</span></div>
+          <div class="stat"><strong>350+</strong><span>Critical issues found</span></div>
+          <div class="stat"><strong>48h</strong><span>Avg. initial scoping time</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container contact-inner">
+        <div>
+          <h2 class="section-title">Request an audit</h2>
+          <p class="section-sub">Tell us a bit about your environment and we'll follow up with scoping questions within one business day.</p>
+        </div>
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+          <div class="form-row">
+            <label for="email">Work email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="form-row">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" autocomplete="organization">
+          </div>
+          <div class="form-row">
+            <label for="message">What would you like audited?</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send request</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> SecureAudit. All rights reserved.</p>
+      <p class="footer-note">This is a demo site built for learning purposes.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
