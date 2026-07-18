@@ -17,7 +17,7 @@ navLinks.querySelectorAll('a').forEach(link => {
 
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
-const API_BASE = 'http://localhost:3001';
+const API_BASE = 'https://smooch-co.onrender.com';
 
 contactForm.addEventListener('submit', async (event) => {
   event.preventDefault();
