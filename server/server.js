@@ -1,6 +1,20 @@
 const express = require('express');
 const cors = require('cors');
-const { insertSubmission } = require('./db');
+const crypto = require('node:crypto');
+const { insertSubmission, listSubmissions } = require('./db');
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, (ch) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[ch]));
+}
+
+function timingSafeEqual(a, b) {
+  const bufA = Buffer.from(String(a));
+  const bufB = Buffer.from(String(b));
+  if (bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -39,6 +53,50 @@ app.post('/api/contact', (req, res) => {
 
   const id = insertSubmission({ name, email, company, message });
   res.status(201).json({ id, status: 'received' });
+});
+
+app.get('/admin/submissions', (req, res) => {
+  const adminToken = process.env.ADMIN_TOKEN;
+  if (!adminToken) {
+    return res.status(503).send('ADMIN_TOKEN is not configured on the server.');
+  }
+  if (!timingSafeEqual(req.query.token || '', adminToken)) {
+    return res.status(401).send('Unauthorized.');
+  }
+
+  const rows = listSubmissions();
+  const rowsHtml = rows.map(row => `
+    <tr>
+      <td>${row.id}</td>
+      <td>${escapeHtml(row.created_at)}</td>
+      <td>${escapeHtml(row.name)}</td>
+      <td>${escapeHtml(row.email)}</td>
+      <td>${escapeHtml(row.company || '')}</td>
+      <td>${escapeHtml(row.message)}</td>
+    </tr>
+  `).join('');
+
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Submissions</title>
+      <style>
+        body { font-family: sans-serif; margin: 2rem; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
+        th { background: #f0f0f0; }
+      </style>
+    </head>
+    <body>
+      <h1>Contact form submissions (${rows.length})</h1>
+      <table>
+        <tr><th>ID</th><th>Received</th><th>Name</th><th>Email</th><th>Company</th><th>Message</th></tr>
+        ${rowsHtml}
+      </table>
+    </body>
+    </html>
+  `);
 });
 
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
